@@ -1,0 +1,44 @@
+syntax = "proto3";
+
+service UserService {
+  rpc RegisterUser (RegisterRequest) returns (RegisterReply) {}
+  rpc GetUser (UserRequest) returns (UserReply) {}
+  rpc ListUsers (Empty) returns (stream UserReply) {}
+  rpc Login (LoginRequest) returns (LoginReply) {}
+}
+
+message RegisterRequest {
+  string username = 1;
+  string email = 2;
+  string password = 3;
+}
+
+message RegisterReply {
+  int32 user_id = 1;
+  string message = 2;
+}
+
+message UserRequest {
+  int32 user_id = 1;
+}
+
+message UserReply {
+  int32 user_id = 1;
+  string username = 2;
+  string email = 3;
+}
+
+message LoginRequest {
+  string username = 1;
+  string password = 2;
+}
+
+message LoginReply {
+  bool success = 1;
+  string message = 2;
+  string token = 3;
+}
+
+message Empty {}
+
+
